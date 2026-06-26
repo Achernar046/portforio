@@ -66,12 +66,12 @@ export const about = {
     ],
   },
   info: [
-    { labelEn: "Real Name", labelTh: "ชื่อจริง", valueEn: "Kunakorn Suwanaphong", valueTh: "กุณากร สุวรรณพงษ์" },
+    { labelEn: "Real Name", labelTh: "ชื่อจริง", valueEn: "Kunakorn Suwanaphong", valueTh: "คุณากร สุวรรณพงษ์" },
     { labelEn: "Faculty", labelTh: "คณะ", valueEn: "Engineering & Industrial Technology", valueTh: "คณะวิศวกรรมและเทคโนโลยีอุตสาหกรรม" },
     { labelEn: "Major", labelTh: "สาขา", valueEn: "Computer Engineering", valueTh: "วิศวกรรมคอมพิวเตอร์" },
     { labelEn: "Year", labelTh: "ชั้นปี", valueEn: "4th Year", valueTh: "ชั้นปีที่ 4" },
     { labelEn: "Focus", labelTh: "ความเชี่ยวชาญ", valueEn: "Network · Infrastructure · Security", valueTh: "เครือข่าย · โครงสร้างพื้นฐาน · ความปลอดภัย" },
-    { labelEn: "Languages", labelTh: "ภาษา", valueEn: "Thai (Native) · English (Technical)", valueTh: "ไทย (เจ้าของภาษา) · อังกฤษ (เอกสารเทคนิค)" },
+    { labelEn: "Languages", labelTh: "ภาษา", valueEn: "Thai (mother language) · English (second language)", valueTh: "ไทย (ภาษาแม่) · อังกฤษ (ภาษาที่สอง)" },
   ],
   stats: [
     { value: "4th", labelEn: "Year", labelTh: "ปี" },
@@ -125,3 +125,97 @@ export const contact = {
   instagram: "https://instagram.com/kunakorn_kup/",
   instagramHandle: "@kunakorn_kup",
 };
+
+export interface Certificate {
+  id: string;
+  titleEn: string;
+  titleTh: string;
+  issuerEn: string;
+  issuerTh: string;
+  file: string;
+}
+
+export const certificates: Certificate[] = [
+  {
+    id: "thctt-24",
+    titleEn: "Thailand Cyber Top Talent 2024",
+    titleTh: "Thailand Cyber Top Talent 2024",
+    issuerEn: "NCSA",
+    issuerTh: "สอท. (สำนักงานคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ)",
+    file: "/picture/certificates/Cert Senior THCTT24_Num491.pdf"
+  },
+  {
+    id: "ctf-part",
+    titleEn: "CTF Competition Participant",
+    titleTh: "ผู้เข้าร่วมการแข่งขัน CTF",
+    issuerEn: "Cyber Security Agency",
+    issuerTh: "หน่วยงานความมั่นคงปลอดภัยไซเบอร์",
+    file: "/picture/certificates/CTF_Cert_Part15.pdf"
+  },
+  {
+    id: "hackathon-2",
+    titleEn: "Hackathon #2 Participant",
+    titleTh: "ผู้เข้าร่วม Hackathon #2",
+    issuerEn: "Hackathon Organizer",
+    issuerTh: "ผู้จัดงาน Hackathon",
+    file: "/picture/certificates/Certificate_Hackathon#2.pdf"
+  },
+  {
+    id: "python-essentials",
+    titleEn: "Python Essentials 1",
+    titleTh: "Python Essentials 1",
+    issuerEn: "Cisco Networking Academy & Python Institute",
+    issuerTh: "Cisco Networking Academy & Python Institute",
+    file: "/picture/certificates/Python_Essentials_1_certificate_kunakorn-s-psru-ac-th_e821c98c-ca92-4550-abe1-7baa9e3ce90f.pdf"
+  },
+  {
+    id: "cert-kunakorn",
+    titleEn: "Academic Achievement Certificate",
+    titleTh: "เกียรติบัตรสำเร็จการศึกษา/ผลงานทางวิชาการ",
+    issuerEn: "Pibulsongkram Rajabhat University",
+    issuerTh: "มหาวิทยาลัยราชภัฏพิบูลสงคราม",
+    file: "/picture/certificates/คุณากร สุวรรณพงษ์.pdf"
+  },
+  {
+    id: "cert-1",
+    titleEn: "Certificate of Achievement",
+    titleTh: "เกียรติบัตรแสดงความสำเร็จ",
+    issuerEn: "Training Center",
+    issuerTh: "ศูนย์อบรมสัมมนา",
+    file: "/picture/certificates/certificate(1).pdf"
+  },
+  {
+    id: "cert-generic",
+    titleEn: "Technical Training Certificate",
+    titleTh: "เกียรติบัตรฝึกอบรมทางเทคนิค",
+    issuerEn: "Education Provider",
+    issuerTh: "สถาบันการศึกษาและฝึกอบรม",
+    file: "/picture/certificates/certificate.pdf"
+  },
+  {
+    id: "cert-award",
+    titleEn: "Achievement Award",
+    titleTh: "รางวัลผลงานดีเด่น",
+    issuerEn: "Competition Committee",
+    issuerTh: "คณะกรรมการจัดงาน",
+    file: "/picture/certificates/11.png"
+  }
+];
+
+export const galleryImages = [
+  "/picture/pic/IMG20240808123203.jpg",
+  "/picture/pic/IMG20241005231000.jpg",
+  "/picture/pic/IMG20241008160112.jpg",
+  "/picture/pic/IMG20241127155829.jpg",
+  "/picture/pic/IMG20241226121403.jpg",
+  "/picture/pic/IMG20241227120238.jpg",
+  "/picture/pic/IMG20250213160810.jpg",
+  "/picture/pic/IMG_4853.jpg",
+  "/picture/pic/IMG_4980.jpg",
+  "/picture/pic/IMG_5028.jpg",
+  "/picture/pic/IMG_5552.JPG",
+  "/picture/pic/IMG_9931.jpg",
+  "/picture/pic/received_1504015043843323.jpeg",
+  "/picture/pic/received_761241249669225.jpeg",
+  "/picture/pic/received_773726318645939.jpeg"
+];

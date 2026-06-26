@@ -10,6 +10,7 @@ const navItems = [
   { href: "#projects", en: "Projects", th: "โปรเจกต์" },
   { href: "#achievements", en: "Achievements", th: "ผลงาน" },
   { href: "#learning", en: "Learning", th: "การเรียนรู้" },
+  { href: "#certificates", en: "Certificates", th: "ใบรับรอง" },
   { href: "#contact", en: "Contact", th: "ติดต่อ" },
 ];
 
