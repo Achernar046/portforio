@@ -104,7 +104,7 @@ export default function ContactSection() {
           className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-semibold transition-all shadow-[0_0_24px_rgba(59,130,246,0.35)] hover:shadow-[0_0_36px_rgba(59,130,246,0.55)] hover:-translate-y-0.5"
         >
           <FileText size={16} />
-          {t("Download Resume", "ดาวน์โหลด Resume")}
+          {t("Download CV", "ดาวน์โหลด CV")}
         </motion.a>
       </div>
     </section>
