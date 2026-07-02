@@ -95,7 +95,9 @@ export default function ContactSection() {
         {/* Resume button */}
         <motion.a
           id="resume-btn"
-          href="#"
+          href="/cv.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
