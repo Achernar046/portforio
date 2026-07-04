@@ -34,12 +34,12 @@ export default function ProjectsSection() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ y: -6 }}
-              className="group relative rounded-2xl bg-white/[0.03] border border-white/5 overflow-hidden backdrop-blur-sm transition-all hover:border-blue-500/30 hover:shadow-[0_12px_40px_rgba(59,130,246,0.12)]"
+              className="group relative rounded-2xl bg-white/[0.03] border border-white/5 overflow-hidden backdrop-blur-sm transition-all hover:border-blue-500/30 hover:shadow-[0_12px_40px_rgba(59,130,246,0.12)] flex flex-col h-full"
             >
               {/* Top gradient line */}
               <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${proj.color} origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300`} />
 
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-1">
                 {/* Type badge */}
                 <div className="mb-4">
                   <span className="inline-block px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono uppercase tracking-wider">
@@ -53,12 +53,12 @@ export default function ProjectsSection() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-slate-400 text-sm leading-relaxed mb-5">
+                <p className="text-slate-400 text-sm leading-relaxed mb-5 flex-1">
                   {t(proj.descEn, proj.descTh)}
                 </p>
 
                 {/* Tech stack */}
-                <div className="flex flex-wrap gap-2 mt-auto">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {proj.stack.map((s) => (
                     <span
                       key={s}
@@ -68,6 +68,21 @@ export default function ProjectsSection() {
                     </span>
                   ))}
                 </div>
+
+                {/* Project Links */}
+                {proj.github && (
+                  <div className="mt-2 pt-4 border-t border-white/5 flex items-center justify-end">
+                    <a
+                      href={proj.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-slate-400 hover:text-blue-400 text-xs font-mono transition-colors"
+                    >
+                      <ExternalLink size={14} />
+                      {t("GitHub Repo", "คลังโค้ด GitHub")}
+                    </a>
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}

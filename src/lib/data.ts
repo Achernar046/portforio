@@ -21,6 +21,7 @@ export interface Project {
   descTh: string;
   stack: string[];
   color: string;
+  github?: string;
 }
 
 export interface Achievement {
@@ -41,14 +42,14 @@ export const hero = {
   badge: { en: "Available for Internship & Full-time", th: "พร้อมรับงานฝึกงาน & งานประจำ" },
   role: { en: "Computer Engineering Student · Network & Infrastructure Enthusiast", th: "นักศึกษาวิศวกรรมคอมพิวเตอร์ · ผู้สนใจ Network & Infrastructure" },
   description: {
-    en: "Computer Engineering student with interests in Network Infrastructure, Hardware Systems, and Cybersecurity fundamentals. Passionate about designing reliable systems and solving technical problems.",
-    th: "นักศึกษาวิศวกรรมคอมพิวเตอร์ ชั้นปีที่ 4 มีความสนใจด้าน Network Infrastructure, Computer Hardware และ System Administration รวมถึงมีพื้นฐานด้าน Cybersecurity และ Software Development",
+    en: "Computer Engineering student with a strong interest in Network Engineering, IT Infrastructure, Linux Systems, and Virtualization. Experienced in building home lab environments using Proxmox VE, Ubuntu Server, Docker, and networking technologies.",
+    th: "นักศึกษาวิศวกรรมคอมพิวเตอร์ที่มีความสนใจอย่างแรงกล้าด้าน Network Engineering, IT Infrastructure, Linux Systems และ Virtualization มีประสบการณ์ในการสร้างโฮมแล็บด้วย Proxmox VE, Ubuntu Server, Docker และเทคโนโลยีเครือข่าย",
   },
   terminalLines: [
     { prompt: true, text: "whoami" },
-    { prompt: false, text: "achernar @ engineering-student" },
+    { prompt: false, text: "kunakorn @ engineering-student" },
     { prompt: true, text: "cat focus.txt" },
-    { prompt: false, text: "Network · Infrastructure · Security · Hardware" },
+    { prompt: false, text: "Network · Infrastructure · Virtualization · Linux" },
     { prompt: true, text: "status --check" },
     { prompt: false, text: "✓ Open to opportunities" },
   ],
@@ -57,62 +58,122 @@ export const hero = {
 export const about = {
   bio: {
     en: [
-      "I'm a 4th-year Computer Engineering student with a strong focus on Network Infrastructure, Computer Hardware, and System Administration. I also have a solid foundation in Cybersecurity and Software Development.",
-      "I love learning new technologies through Hackathons, CTF competitions, and real-world project development. I prioritize building efficient, stable systems that can scale in the future.",
+      "I'm a Computer Engineering student with a strong interest in Network Engineering, IT Infrastructure, Linux Systems, and Virtualization.",
+      "I have hands-on experience building home lab environments using Proxmox VE, Ubuntu Server, Docker, and various networking technologies. I am passionate about designing reliable systems, solving technical problems, and continuously learning modern infrastructure technologies.",
     ],
     th: [
-      "ปัจจุบันเป็นนักศึกษาวิศวกรรมคอมพิวเตอร์ ชั้นปีที่ 4 มีความสนใจด้าน Network Infrastructure, Computer Hardware และ System Administration รวมถึงมีพื้นฐานด้าน Cybersecurity และ Software Development",
-      "ชอบเรียนรู้เทคโนโลยีใหม่ ๆ ผ่านการแข่งขัน Hackathon, CTF และการพัฒนาโปรเจกต์จริง โดยให้ความสำคัญกับการออกแบบระบบที่มีประสิทธิภาพ มีความเสถียร และสามารถขยายระบบได้ในอนาคต",
+      "เป็นนักศึกษาวิศวกรรมคอมพิวเตอร์ที่มีความสนใจอย่างมากในด้าน Network Engineering, IT Infrastructure, Linux Systems และ Virtualization",
+      "มีประสบการณ์ลงมือปฏิบัติจริงในการสร้างสภาพแวดล้อมโฮมแล็บด้วย Proxmox VE, Ubuntu Server, Docker และเทคโนโลยีเครือข่ายต่าง ๆ มุ่งมั่นที่จะออกแบบระบบที่เชื่อถือได้ แก้ไขปัญหาทางเทคนิค และเรียนรู้เทคโนโลยีโครงสร้างพื้นฐานที่ทันสมัยอยู่เสมอ",
     ],
   },
   info: [
     { labelEn: "Real Name", labelTh: "ชื่อจริง", valueEn: "Kunakorn Suwanaphong", valueTh: "คุณากร สุวรรณพงษ์" },
     { labelEn: "Faculty", labelTh: "คณะ", valueEn: "Engineering & Industrial Technology", valueTh: "คณะวิศวกรรมและเทคโนโลยีอุตสาหกรรม" },
     { labelEn: "Major", labelTh: "สาขา", valueEn: "Computer Engineering", valueTh: "วิศวกรรมคอมพิวเตอร์" },
-    { labelEn: "Year", labelTh: "ชั้นปี", valueEn: "4th Year", valueTh: "ชั้นปีที่ 4" },
-    { labelEn: "Focus", labelTh: "ความเชี่ยวชาญ", valueEn: "Network · Infrastructure · Security", valueTh: "เครือข่าย · โครงสร้างพื้นฐาน · ความปลอดภัย" },
-    { labelEn: "Languages", labelTh: "ภาษา", valueEn: "Thai (mother language) · English (second language)", valueTh: "ไทย (ภาษาแม่) · อังกฤษ (ภาษาที่สอง)" },
+    { labelEn: "Education", labelTh: "การศึกษา", valueEn: "Pibulsongkram Rajabhat University (2025 - Present)", valueTh: "มหาวิทยาลัยราชภัฏพิบูลสงคราม (2025 - ปัจจุบัน)" },
+    { labelEn: "Focus", labelTh: "ความเชี่ยวชาญ", valueEn: "Network · Infrastructure · Linux · Virtualization", valueTh: "เครือข่าย · โครงสร้างพื้นฐาน · ลินุกซ์ · Virtualization" },
+    { labelEn: "Languages", labelTh: "ภาษา", valueEn: "Thai (Native) · English (Intermediate)", valueTh: "ไทย (ภาษาแม่) · อังกฤษ (ระดับกลาง)" },
   ],
   stats: [
-    { value: "4th", labelEn: "Year", labelTh: "ปี" },
-    { value: "10+", labelEn: "Skills", labelTh: "ทักษะ" },
-    { value: "3+", labelEn: "Projects", labelTh: "โปรเจกต์" },
-    { value: "4+", labelEn: "Competitions", labelTh: "การแข่งขัน" },
+    { value: "2025", labelEn: "Started", labelTh: "เริ่มศึกษา" },
+    { value: "5", labelEn: "Skill Areas", labelTh: "กลุ่มทักษะ" },
+    { value: "3", labelEn: "Projects", labelTh: "โปรเจกต์" },
+    { value: "4", labelEn: "Achievements", labelTh: "ผลงาน" },
   ],
   interests: [
     { icon: "🌐", label: "Networking" }, { icon: "🐧", label: "Linux" },
-    { icon: "🔒", label: "Cybersecurity" }, { icon: "☁️", label: "Cloud" },
-    { icon: "⛓️", label: "Blockchain" }, { icon: "🔧", label: "Hardware" },
-    { icon: "📡", label: "SD-WAN" }, { icon: "🖥️", label: "Server" },
-    { icon: "🛡️", label: "Zero Trust" }, { icon: "🔬", label: "Embedded" },
+    { icon: "🖥️", label: "Server" }, { icon: "📦", label: "Docker" },
+    { icon: "🛡️", label: "Infrastructure" }, { icon: "🔒", label: "Virtualization" },
   ],
 };
 
 export const skillCategories: SkillCategory[] = [
-  { id: "networking", icon: "🌐", titleEn: "Networking", titleTh: "เครือข่าย", color: "from-blue-500/20 to-cyan-500/20", tags: ["TCP/IP", "Routing", "Switching", "VLAN", "Network Security", "Firewall", "VPN", "SD-WAN", "Zero Trust", "Wireless Networking"] },
-  { id: "infrastructure", icon: "🖥️", titleEn: "Infrastructure", titleTh: "โครงสร้างพื้นฐาน", color: "from-violet-500/20 to-purple-500/20", tags: ["Linux", "Windows Server", "System Administration", "Virtualization", "Infrastructure Design", "Server Deployment"] },
-  { id: "hardware", icon: "⚙️", titleEn: "Hardware", titleTh: "ฮาร์ดแวร์", color: "from-orange-500/20 to-amber-500/20", tags: ["Computer Architecture", "Digital Logic", "Embedded Systems", "Hardware Troubleshooting", "Computer Assembly"] },
-  { id: "programming", icon: "💻", titleEn: "Programming", titleTh: "การเขียนโปรแกรม", color: "from-green-500/20 to-emerald-500/20", tags: ["C", "C++", "Python", "JavaScript", "TypeScript", "Solidity", "SQL"] },
-  { id: "web", icon: "🔗", titleEn: "Web Development", titleTh: "พัฒนาเว็บ", color: "from-pink-500/20 to-rose-500/20", tags: ["HTML", "CSS", "JavaScript", "Node.js", "Express", "REST API", "MongoDB", "MySQL"] },
-  { id: "security", icon: "🔒", titleEn: "Security", titleTh: "ความปลอดภัย", color: "from-red-500/20 to-orange-500/20", tags: ["Network Security", "SIEM", "SOAR", "Endpoint Protection", "WAF", "Secure Email Gateway", "Content Filtering", "Malware Analysis", "CTF"] },
-  { id: "tools", icon: "🛠️", titleEn: "Tools & Platforms", titleTh: "เครื่องมือ", color: "from-slate-500/20 to-gray-500/20", tags: ["Git", "GitHub", "Docker", "VS Code", "VMware", "VirtualBox", "Cisco Packet Tracer", "Wireshark", "Burp Suite", "Nmap", "GNS3"] },
-  { id: "blockchain", icon: "⛓️", titleEn: "Blockchain", titleTh: "บล็อกเชน", color: "from-yellow-500/20 to-amber-500/20", tags: ["Solidity", "Hardhat", "ethers.js", "Smart Contract Development"] },
+  { id: "networking", icon: "🌐", titleEn: "Networking", titleTh: "เครือข่าย", color: "from-blue-500/20 to-cyan-500/20", tags: ["TCP/IP", "VLAN", "Routing & Switching", "DHCP", "DNS", "NAT", "VPN", "SSH"] },
+  { id: "infrastructure", icon: "🖥️", titleEn: "System & Infrastructure", titleTh: "ระบบ & โครงสร้างพื้นฐาน", color: "from-violet-500/20 to-purple-500/20", tags: ["Linux", "Ubuntu Server", "Proxmox VE", "Docker", "Virtual Machines", "Windows"] },
+  { id: "programming", icon: "💻", titleEn: "Programming", titleTh: "การเขียนโปรแกรม", color: "from-green-500/20 to-emerald-500/20", tags: ["C", "Python", "HTML", "CSS", "JavaScript (Basic)"] },
+  { id: "security", icon: "🔒", titleEn: "Cybersecurity", titleTh: "ความปลอดภัยไซเบอร์", color: "from-red-500/20 to-orange-500/20", tags: ["Wireshark", "Nmap", "Burp Suite", "CTF", "Linux Security (Basic)"] },
+  { id: "tools", icon: "🛠️", titleEn: "Tools", titleTh: "เครื่องมือ", color: "from-slate-500/20 to-gray-500/20", tags: ["Git", "GitHub", "Cloudflare", "Vercel"] },
 ];
 
 export const projects: Project[] = [
-  { id: "wastecoin", typeEn: "Backend Development", typeTh: "พัฒนา Backend", titleEn: "WasteCoin Backend", titleTh: "WasteCoin Backend", descEn: "Developed backend services for WasteCoin platform, including user authentication with JWT & bcrypt, RESTful API design, and MongoDB database integration.", descTh: "พัฒนา Backend สำหรับแพลตฟอร์ม WasteCoin ครอบคลุมระบบ Authentication ด้วย JWT & bcrypt, ออกแบบ RESTful API และเชื่อมต่อฐานข้อมูล MongoDB", stack: ["Node.js", "Express", "JWT", "bcrypt", "REST API", "MongoDB"], color: "from-green-500 to-emerald-600" },
-  { id: "smartcontract", typeEn: "Blockchain Dev", typeTh: "พัฒนา Blockchain", titleEn: "Smart Contract Development", titleTh: "พัฒนา Smart Contract", descEn: "Developed and tested smart contracts using Solidity on Hardhat framework. Explored dApp development and blockchain integration with ethers.js.", descTh: "พัฒนาและทดสอบ Smart Contract ด้วย Solidity บน Hardhat Framework สำรวจการพัฒนา dApp และการเชื่อมต่อ Blockchain ด้วย ethers.js", stack: ["Solidity", "Hardhat", "ethers.js"], color: "from-yellow-500 to-orange-600" },
-  { id: "network-sim", typeEn: "Network Lab", typeTh: "แล็บเครือข่าย", titleEn: "Enterprise Network Simulation", titleTh: "จำลองระบบเครือข่ายองค์กร", descEn: "Designed and simulated enterprise network topologies using GNS3 & Cisco Packet Tracer, covering VLANs, routing protocols, firewall rules, and VPN configurations.", descTh: "ออกแบบและจำลองโทโพโลยีเครือข่ายองค์กรด้วย GNS3 & Cisco Packet Tracer ครอบคลุม VLAN, Routing Protocol, Firewall และ VPN", stack: ["GNS3", "Cisco PT", "VLAN", "VPN", "Firewall"], color: "from-blue-500 to-cyan-600" },
+  { 
+    id: "wastecoin", 
+    typeEn: "Backend Development", 
+    typeTh: "พัฒนา Backend", 
+    titleEn: "WasteCoin Backend", 
+    titleTh: "WasteCoin Backend", 
+    descEn: "Developed backend services for WasteCoin platform, including user authentication with JWT & bcrypt, RESTful API design, and MongoDB database integration.", 
+    descTh: "พัฒนา Backend สำหรับแพลตฟอร์ม WasteCoin ครอบคลุมระบบ Authentication ด้วย JWT & bcrypt, ออกแบบ RESTful API และเชื่อมต่อฐานข้อมูล MongoDB", 
+    stack: ["Node.js", "Express", "JWT", "bcrypt", "REST API", "MongoDB"], 
+    color: "from-green-500 to-emerald-600" 
+  },
+  { 
+    id: "smartcontract", 
+    typeEn: "Blockchain Dev", 
+    typeTh: "พัฒนา Blockchain", 
+    titleEn: "Smart Contract Development", 
+    titleTh: "พัฒนา Smart Contract", 
+    descEn: "Developed and tested smart contracts using Solidity on Hardhat framework. Explored dApp development and blockchain integration with ethers.js.", 
+    descTh: "พัฒนาและทดสอบ Smart Contract ด้วย Solidity บน Hardhat Framework สำรวจการพัฒนา dApp และการเชื่อมต่อ Blockchain ด้วย ethers.js", 
+    stack: ["Solidity", "Hardhat", "ethers.js"], 
+    color: "from-yellow-500 to-orange-600" 
+  },
+  { 
+    id: "network-sim", 
+    typeEn: "Network Lab", 
+    typeTh: "แล็บเครือข่าย", 
+    titleEn: "Enterprise Network Simulation", 
+    titleTh: "จำลองระบบเครือข่ายองค์กร", 
+    descEn: "Designed and simulated enterprise network topologies using GNS3 & Cisco Packet Tracer, covering VLANs, routing protocols, firewall rules, and VPN configurations.", 
+    descTh: "ออกแบบและจำลองโทโพโลยีเครือข่ายองค์กรด้วย GNS3 & Cisco Packet Tracer ครอบคลุม VLAN, Routing Protocol, Firewall และ VPN", 
+    stack: ["GNS3", "Cisco PT", "VLAN", "VPN", "Firewall"], 
+    color: "from-blue-500 to-cyan-600" 
+  },
+  { 
+    id: "mips-cpu", 
+    typeEn: "Computer Architecture", 
+    typeTh: "สถาปัตยกรรมคอมพิวเตอร์", 
+    titleEn: "Single Cycle MIPS CPU Design", 
+    titleTh: "ออกแบบ Single Cycle MIPS CPU", 
+    descEn: "Designed and implemented a Single Cycle MIPS CPU. Tested instruction execution and memory operations.", 
+    descTh: "ออกแบบและพัฒนาหน่วยประมวลผล Single Cycle MIPS CPU พร้อมทดสอบการทำงานของชุดคำสั่งและการทำงานร่วมกับหน่วยความจำ", 
+    stack: ["MIPS", "Digital Logic", "CPU Design"], 
+    color: "from-blue-500 to-cyan-600" 
+  },
+  { 
+    id: "homelab", 
+    typeEn: "System & Infrastructure", 
+    typeTh: "ระบบและโครงสร้างพื้นฐาน", 
+    titleEn: "Home Lab Infrastructure", 
+    titleTh: "โครงสร้างพื้นฐานโฮมแล็บ", 
+    descEn: "Built a virtualization environment using Proxmox VE. Deployed Ubuntu Server VMs with SSH, Docker, and Tailscale. Practiced Linux administration and infrastructure management.", 
+    descTh: "สร้างระบบเสมือน (Virtualization) โดยใช้ Proxmox VE และติดตั้งใช้งาน Ubuntu Server VMs ร่วมกับ SSH, Docker และ Tailscale พร้อมฝึกฝนการบริหารจัดการระบบ Linux", 
+    stack: ["Proxmox VE", "Ubuntu Server", "Docker", "Tailscale", "Linux"], 
+    color: "from-violet-500 to-purple-600" 
+  },
+  { 
+    id: "portfolio-web", 
+    typeEn: "Web Development", 
+    typeTh: "พัฒนาเว็บไซต์", 
+    titleEn: "Portfolio Website", 
+    titleTh: "เว็บไซต์พอร์ตโฟลิโอ", 
+    descEn: "Developed and deployed a personal portfolio. Configured Cloudflare DNS and Vercel deployment.", 
+    descTh: "พัฒนาและนำส่งเว็บไซต์พอร์ตโฟลิโอส่วนตัว พร้อมทั้งตั้งค่า Cloudflare DNS และเชื่อมโยงบริการของ Vercel สำหรับดีพลอยเมนต์", 
+    stack: ["Next.js", "React", "Cloudflare", "Vercel"], 
+    color: "from-pink-500 to-rose-600",
+    github: "https://github.com/Achernar046/portforio.git"
+  },
 ];
 
 export const achievements: Achievement[] = [
   { id: "psru", icon: "🥉", titleEn: "PSRU Cyber Hackathon", titleTh: "PSRU Cyber Hackathon", subtitleEn: "🏆 3rd Place", subtitleTh: "🏆 อันดับที่ 3", descEn: "Participated in cybersecurity challenges involving practical problem solving and teamwork in a fast-paced competition.", descTh: "เข้าร่วมการแข่งขัน Hackathon ด้านไซเบอร์ซีเคียวริตี้ที่ต้องใช้ทักษะการแก้ปัญหาและการทำงานเป็นทีม", highlight: true },
-  { id: "business", icon: "💼", titleEn: "Business Model Competition", titleTh: "การแข่งขันด้านโมเดลธุรกิจ", subtitleEn: "Participant", subtitleTh: "ผู้เข้าร่วม", descEn: "Developed and presented an innovative business model as part of a cross-disciplinary team competition.", descTh: "พัฒนาและนำเสนอโมเดลธุรกิจที่สร้างสรรค์ในการแข่งขันข้ามสาขาวิชา" },
   { id: "cybersec", icon: "🔐", titleEn: "Cybersecurity Competition", titleTh: "การแข่งขันด้าน Cybersecurity", subtitleEn: "Participant", subtitleTh: "ผู้เข้าร่วม", descEn: "Applied theoretical knowledge in practical cybersecurity challenges covering network security, CTF, and defensive operations.", descTh: "นำความรู้ทางทฤษฎีไปใช้ในโจทย์ Cybersecurity จริง ครอบคลุมความปลอดภัยเครือข่าย, CTF และการป้องกันระบบ" },
-  { id: "solidworks", icon: "🏗️", titleEn: "SolidWorks Competition", titleTh: "การแข่งขัน SolidWorks", subtitleEn: "Participant", subtitleTh: "ผู้เข้าร่วม", descEn: "Competed in 3D engineering design using SolidWorks, showcasing technical precision and engineering fundamentals.", descTh: "แข่งขันออกแบบ 3D เชิงวิศวกรรมด้วย SolidWorks แสดงความแม่นยำทางเทคนิคและพื้นฐานทางวิศวกรรม" },
+  { id: "business", icon: "💼", titleEn: "Business Model Competition", titleTh: "การแข่งขันด้านโมเดลธุรกิจ", subtitleEn: "Participant", subtitleTh: "ผู้เข้าร่วม", descEn: "Developed and presented an innovative business model as part of a cross-disciplinary team competition.", descTh: "พัฒนาและนำเสนอโมเดลธุรกิจที่สร้างสรรค์ในการแข่งขันข้ามสาขาวิชา" },
+  { id: "solidworks", icon: "🏗️", titleEn: "SolidWorks Competition", titleTh: "การแข่งขัน SolidWorks", subtitleEn: "Participant", subtitleTh: "ผู้เข้าร่วม", descEn: "Competed in 3D engineering design using SolidWorks, showcasing technical precision and engineering fundamentals.", descTh: "แข่งขันออกแบบ 3D เชิงวิศวรรณด้วย SolidWorks แสดงความแม่นยำทางเทคนิคและพื้นฐานทางวิศวกรรม" },
 ];
 
 export const learningTopics = [
+  { icon: "🐧", titleEn: "System Administration", titleTh: "การบริหารจัดการระบบ", items: ["Linux Administration", "Windows Server", "Active Directory", "Virtualization (Proxmox VE/ESXi)", "Docker & Containerization", "Backup & Recovery"] },
   { icon: "🛡️", titleEn: "Security Topics", titleTh: "หัวข้อด้านความปลอดภัย", items: ["Firewalls", "NAC", "Sandbox", "WAF", "Secure Email Gateway", "Content Filter", "Wi-Fi Security", "Endpoint Hardening", "SIEM", "SOAR"] },
   { icon: "🌐", titleEn: "Network & Cloud", titleTh: "เครือข่าย & คลาวด์", items: ["SD-WAN", "Zero Trust Network Access", "Cloud Security", "SASE", "Endpoint Monitoring", "Cloud Computing"] },
   { icon: "🔬", titleEn: "Research Interests", titleTh: "หัวข้อที่สนใจวิจัย", items: ["Enterprise Network", "Infrastructure Design", "Distributed Systems", "Hardware Architecture", "High Availability Systems", "Security Operations"] },
