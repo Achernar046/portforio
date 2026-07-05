@@ -4,6 +4,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
+import LabSection from "@/components/sections/LabSection";
 import AchievementsSection from "@/components/sections/AchievementsSection";
 import LearningSection from "@/components/sections/LearningSection";
 import CertificatesSection from "@/components/sections/CertificatesSection";
@@ -31,6 +32,7 @@ export default function Home() {
       <AboutSection />
       <SkillsSection />
       <ProjectsSection />
+      <LabSection />
       <AchievementsSection />
       <LearningSection />
       <CertificatesSection />

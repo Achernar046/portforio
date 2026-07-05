@@ -8,6 +8,7 @@ const navItems = [
   { href: "#about", en: "About", th: "เกี่ยวกับ" },
   { href: "#skills", en: "Skills", th: "ทักษะ" },
   { href: "#projects", en: "Projects", th: "โปรเจกต์" },
+  { href: "#lab", en: "HomeLab", th: "โฮมแล็บ" },
   { href: "#achievements", en: "Achievements", th: "ผลงาน" },
   { href: "#learning", en: "Learning", th: "การเรียนรู้" },
   { href: "#certificates", en: "Certificates", th: "ใบรับรอง" },
