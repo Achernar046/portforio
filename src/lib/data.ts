@@ -146,9 +146,9 @@ export const projects: Project[] = [
     typeTh: "ระบบและโครงสร้างพื้นฐาน",
     titleEn: "Home Lab Infrastructure",
     titleTh: "โครงสร้างพื้นฐานโฮมแล็บ",
-    descEn: "Built a virtualization environment using Proxmox VE. Deployed Ubuntu Server VMs with SSH, Docker, and Tailscale. Practiced Linux administration and infrastructure management.",
-    descTh: "สร้างระบบเสมือน (Virtualization) โดยใช้ Proxmox VE และติดตั้งใช้งาน Ubuntu Server VMs ร่วมกับ SSH, Docker และ Tailscale พร้อมฝึกฝนการบริหารจัดการระบบ Linux",
-    stack: ["Proxmox VE", "Ubuntu Server", "Docker", "Tailscale", "Linux"],
+    descEn: "Built an enterprise-grade home lab using Proxmox VE. Deployed a Windows Server 2022 Domain Controller for Active Directory (AD DS, DNS, DHCP, GPOs), implemented a virtual pfSense firewall with VLAN segmentation, and configured a standalone WireGuard remote access VPN server on Ubuntu.",
+    descTh: "สร้างระบบโฮมแล็บจำลองเครือข่ายระดับองค์กรโดยใช้ Proxmox VE โดยติดตั้ง Windows Server 2022 Domain Controller สำหรับจัดการระบบ Active Directory (AD DS, DNS, DHCP, GPOs), ติดตั้ง pfSense Firewall ร่วมกับการแบ่ง VLAN เครือข่าย และตั้งค่า WireGuard VPN Server บน Ubuntu สำหรับการรีโมทเข้าใช้งานอย่างปลอดภัย",
+    stack: ["Proxmox VE", "Active Directory", "Windows Server 2022", "pfSense", "VLAN", "WireGuard", "VPN"],
     color: "from-violet-500 to-purple-600"
   },
   {
