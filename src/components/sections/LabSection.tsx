@@ -9,6 +9,7 @@ import {
 import { labs, type Lab } from "@/lib/data";
 import { useLang } from "@/contexts/LangContext";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import { getLabDiagram } from "@/components/LabDiagrams";
 
 /* ─── Accent colour map ─────────────────────────────────── */
 const accentMap: Record<string, { border: string; text: string; bg: string; badge: string }> = {
@@ -26,12 +27,17 @@ const LAB_STATIC_FOLDER: Record<string, string> = {
   "active-directory": "active-directory",
   "pfsense-vlan":     "pfsense-vlan",
   "wireguard-vpn":    "wireguard-vpn",
+  "ospf-routing":     "OSPFRoutingLab(FRRouting)",
+  "bgp-routing":      "BGPRoutingLab(FRRouting)",
 };
 
 function imgUrl(labId: string, file: string) {
   const folder = LAB_STATIC_FOLDER[labId] ?? labId;
   return `/lab-data/${folder}/${encodeURIComponent(file)}`;
 }
+
+/* ─── In-memory image cache (persists across modal open/close) ── */
+const imageCache = new Map<string, string[]>();
 
 /* ─── Lightbox ──────────────────────────────────────────── */
 function Lightbox({
@@ -132,10 +138,20 @@ function GalleryTab({ labId, accentColor }: { labId: string; accentColor: string
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
 
   useEffect(() => {
+    if (imageCache.has(labId)) {
+      setImages(imageCache.get(labId)!);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     fetch(`/api/lab-images/${labId}`)
       .then((r) => r.json())
-      .then((d) => { setImages(d.images ?? []); setLoading(false); })
+      .then((d) => {
+        const imgs = d.images ?? [];
+        imageCache.set(labId, imgs);
+        setImages(imgs);
+        setLoading(false);
+      })
       .catch(() => setLoading(false));
   }, [labId]);
 
@@ -417,9 +433,17 @@ function LabModal({ lab, onClose }: { lab: Lab; onClose: () => void }) {
                     <Server size={13} />
                     {t("Network Architecture", "สถาปัตยกรรมเครือข่าย")}
                   </div>
-                  <pre className="bg-black/40 rounded-xl p-4 text-xs font-mono text-slate-300 leading-relaxed overflow-x-auto border border-white/5 whitespace-pre">
+                  {getLabDiagram(lab.id)
+                    ? (
+                      <div className="rounded-xl border border-white/5 bg-black/20 p-4 overflow-x-auto">
+                        {getLabDiagram(lab.id)}
+                      </div>
+                    ) : (
+                      <pre className="bg-black/40 rounded-xl p-4 text-xs font-mono text-slate-300 leading-relaxed overflow-x-auto border border-white/5 whitespace-pre">
 {d.architecture}
-                  </pre>
+                      </pre>
+                    )
+                  }
                 </div>
 
                 <div>

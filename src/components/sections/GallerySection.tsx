@@ -49,8 +49,11 @@ export default function GallerySection() {
               <img
                 src={src}
                 alt={`Moment ${i + 1}`}
+                width={200}
+                height={200}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
+                loading={i < 8 ? "eager" : "lazy"}
+                fetchPriority={i === 0 ? "high" : "low"}
               />
               <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.div>

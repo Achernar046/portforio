@@ -22,6 +22,10 @@ export default function NetworkCanvas() {
     let nodes: Node[] = [];
     let W = 0, H = 0;
     const mouse = { x: -1000, y: -1000 };
+    let paused = false;
+
+    /* ── adaptive node count ── */
+    const nodeCount = () => (window.innerWidth < 768 ? 30 : 55);
 
     function resize() {
       if (!canvas) return;
@@ -42,11 +46,13 @@ export default function NetworkCanvas() {
     }
 
     function draw() {
+      if (paused) { animId = requestAnimationFrame(draw); return; }
+
       ctx!.clearRect(0, 0, W, H);
       const accent = "59,130,246";
       const maxDist = 140;
 
-      // Draw subtle glow at mouse position
+      /* mouse glow */
       if (mouse.x > 0 && mouse.y > 0) {
         const gradient = ctx!.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 60);
         gradient.addColorStop(0, `rgba(${accent}, 0.12)`);
@@ -57,6 +63,7 @@ export default function NetworkCanvas() {
         ctx!.fill();
       }
 
+      /* nodes */
       nodes.forEach((n) => {
         n.x += n.vx; n.y += n.vy;
         if (n.x < 0 || n.x > W) n.vx *= -1;
@@ -67,7 +74,7 @@ export default function NetworkCanvas() {
         ctx!.fill();
       });
 
-      // Draw connections between nodes
+      /* node–node connections */
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
@@ -84,7 +91,7 @@ export default function NetworkCanvas() {
         }
       }
 
-      // Draw connections to mouse
+      /* mouse connections */
       if (mouse.x > 0 && mouse.y > 0) {
         nodes.forEach((n) => {
           const dx = n.x - mouse.x;
@@ -105,7 +112,12 @@ export default function NetworkCanvas() {
       animId = requestAnimationFrame(draw);
     }
 
+    /* ── throttled mousemove (≤16 ms) ── */
+    let lastMove = 0;
     function handleMouseMove(e: MouseEvent) {
+      const now = Date.now();
+      if (now - lastMove < 16) return;
+      lastMove = now;
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     }
@@ -115,9 +127,14 @@ export default function NetworkCanvas() {
       mouse.y = -1000;
     }
 
+    /* ── Page Visibility API — pause when tab hidden ── */
+    function handleVisibility() {
+      paused = document.hidden;
+    }
+
     function init() {
       resize();
-      makeNodes(55);
+      makeNodes(nodeCount());
       cancelAnimationFrame(animId);
       draw();
     }
@@ -125,6 +142,7 @@ export default function NetworkCanvas() {
     window.addEventListener("resize", init);
     window.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("visibilitychange", handleVisibility);
     init();
 
     return () => {
@@ -132,6 +150,7 @@ export default function NetworkCanvas() {
       window.removeEventListener("resize", init);
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
 

@@ -128,9 +128,4 @@ Created via PowerShell loop (`New-ADUser`, `New-ADGroup`, `Add-ADGroupMember`), 
 - Proxmox VE VM hardware configuration (BIOS mode, disk bus, NIC model) and driver compatibility troubleshooting
 - Understanding of Windows edition licensing constraints relevant to enterprise deployment
 
-## 🔜 Next Steps
 
-- [ ] pfSense firewall + VLAN segmentation
-- [ ] WireGuard VPN
-- [ ] Docker + Nginx portfolio deployment
-- [ ] Prometheus/Grafana monitoring

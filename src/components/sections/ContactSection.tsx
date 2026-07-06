@@ -1,8 +1,18 @@
 "use client";
+import React from "react";
 import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LangContext";
 import { contact } from "@/lib/data";
 import { Mail, GitBranch, Camera, FileText, ArrowRight } from "lucide-react";
+
+/* ── inline Facebook SVG (lucide-react doesn't include it) ── */
+function FacebookIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
 
 const links = [
   {
@@ -31,6 +41,15 @@ const links = [
     href: contact.instagram,
     color: "from-pink-500/10 to-purple-500/10",
     border: "border-pink-500/20 hover:border-pink-500/50",
+  },
+  {
+    id: "facebook",
+    icon: null as unknown as React.ElementType,
+    label: "Facebook",
+    value: contact.facebookHandle,
+    href: contact.facebook,
+    color: "from-blue-600/10 to-indigo-500/10",
+    border: "border-blue-600/20 hover:border-blue-500/50",
   },
 ];
 
@@ -80,7 +99,9 @@ export default function ContactSection() {
                 className={`flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br ${link.color} border ${link.border} backdrop-blur-sm text-left transition-all group`}
               >
                 <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
-                  <Icon size={18} className="text-slate-300" />
+                  {link.id === "facebook"
+                    ? <FacebookIcon size={18} />
+                    : <link.icon size={18} className="text-slate-300" />}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs text-slate-500 font-mono uppercase tracking-wide">{link.label}</div>

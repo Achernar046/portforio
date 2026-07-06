@@ -6,6 +6,8 @@ const LAB_FOLDER_MAP: Record<string, string> = {
   "active-directory": "active-directory",
   "pfsense-vlan":     "pfsense-vlan",
   "wireguard-vpn":    "wireguard-vpn",
+  "ospf-routing":     "OSPFRoutingLab(FRRouting)",
+  "bgp-routing":      "BGPRoutingLab(FRRouting)",
 };
 
 const IMAGE_EXTS = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif"]);

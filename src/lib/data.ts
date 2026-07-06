@@ -77,7 +77,7 @@ export const about = {
   stats: [
     { value: "2023", labelEn: "Started", labelTh: "เริ่มศึกษา" },
     { value: "5", labelEn: "Skill Areas", labelTh: "กลุ่มทักษะ" },
-    { value: "3", labelEn: "Projects", labelTh: "โปรเจกต์" },
+    { value: "5", labelEn: "Labs Done", labelTh: "Lab เสร็จแล้ว" },
     { value: "4", labelEn: "Achievements", labelTh: "ผลงาน" },
   ],
   interests: [
@@ -88,12 +88,13 @@ export const about = {
 };
 
 export const skillCategories: SkillCategory[] = [
-  { id: "networking", icon: "🌐", titleEn: "Networking", titleTh: "เครือข่าย", color: "from-blue-500/20 to-cyan-500/20", tags: ["TCP/IP", "VLAN", "Routing & Switching", "DHCP", "DNS", "NAT", "VPN", "SSH"] },
-  { id: "infrastructure", icon: "🖥️", titleEn: "System & Infrastructure", titleTh: "ระบบ & โครงสร้างพื้นฐาน", color: "from-violet-500/20 to-purple-500/20", tags: ["Linux", "Ubuntu Server", "Proxmox VE", "Docker", "Virtual Machines", "Windows"] },
+  { id: "networking", icon: "🌐", titleEn: "Networking", titleTh: "เครือข่าย", color: "from-blue-500/20 to-cyan-500/20", tags: ["TCP/IP", "VLAN", "OSPF", "BGP (eBGP)", "Routing & Switching", "DHCP", "DNS", "NAT", "VPN", "SSH", "FRRouting (FRR)", "vtysh"] },
+  { id: "infrastructure", icon: "🖥️", titleEn: "System & Infrastructure", titleTh: "ระบบ & โครงสร้างพื้นฐาน", color: "from-violet-500/20 to-purple-500/20", tags: ["Linux", "Ubuntu Server", "Proxmox VE", "Docker", "Virtual Machines", "Windows", "Netplan", "sysctl"] },
   { id: "programming", icon: "💻", titleEn: "Programming", titleTh: "การเขียนโปรแกรม", color: "from-green-500/20 to-emerald-500/20", tags: ["C", "Python", "HTML", "CSS", "JavaScript (Basic)"] },
   { id: "security", icon: "🔒", titleEn: "Cybersecurity", titleTh: "ความปลอดภัยไซเบอร์", color: "from-red-500/20 to-orange-500/20", tags: ["Wireshark", "Nmap", "Burp Suite", "CTF", "Linux Security (Basic)"] },
   { id: "tools", icon: "🛠️", titleEn: "Tools", titleTh: "เครื่องมือ", color: "from-slate-500/20 to-gray-500/20", tags: ["Git", "GitHub", "Cloudflare", "Vercel"] },
 ];
+
 
 export const projects: Project[] = [
   {
@@ -146,9 +147,9 @@ export const projects: Project[] = [
     typeTh: "ระบบและโครงสร้างพื้นฐาน",
     titleEn: "Home Lab Infrastructure",
     titleTh: "โครงสร้างพื้นฐานโฮมแล็บ",
-    descEn: "Built an enterprise-grade home lab using Proxmox VE. Deployed a Windows Server 2022 Domain Controller for Active Directory (AD DS, DNS, DHCP, GPOs), implemented a virtual pfSense firewall with VLAN segmentation, and configured a standalone WireGuard remote access VPN server on Ubuntu.",
-    descTh: "สร้างระบบโฮมแล็บจำลองเครือข่ายระดับองค์กรโดยใช้ Proxmox VE โดยติดตั้ง Windows Server 2022 Domain Controller สำหรับจัดการระบบ Active Directory (AD DS, DNS, DHCP, GPOs), ติดตั้ง pfSense Firewall ร่วมกับการแบ่ง VLAN เครือข่าย และตั้งค่า WireGuard VPN Server บน Ubuntu สำหรับการรีโมทเข้าใช้งานอย่างปลอดภัย",
-    stack: ["Proxmox VE", "Active Directory", "Windows Server 2022", "pfSense", "VLAN", "WireGuard", "VPN"],
+    descEn: "Built an enterprise-grade home lab using Proxmox VE. Deployed a Windows Server 2022 Domain Controller for Active Directory (AD DS, DNS, DHCP, GPOs), implemented a virtual pfSense firewall with VLAN segmentation, configured a standalone WireGuard remote access VPN server on Ubuntu, and built a 3-router OSPF/BGP topology using FRRouting to demonstrate dynamic routing protocols in production software.",
+    descTh: "สร้างระบบโฮมแล็บจำลองเครือข่ายระดับองค์กรโดยใช้ Proxmox VE ครอบคลุม Windows Server 2022 Domain Controller (AD DS, DNS, DHCP, GPOs), pfSense Firewall พร้อม VLAN, WireGuard VPN Server บน Ubuntu และสร้างโทโพโลยีเราเตอร์ 3 ตัวด้วย FRRouting เพื่อสาธิต OSPF และ eBGP ด้วยซอฟต์แวร์ Routing ระดับ Production",
+    stack: ["Proxmox VE", "Active Directory", "Windows Server 2022", "pfSense", "VLAN", "WireGuard", "VPN", "FRRouting", "OSPF", "BGP"],
     color: "from-violet-500 to-purple-600"
   },
   {
@@ -175,7 +176,7 @@ export const achievements: Achievement[] = [
 export const learningTopics = [
   { icon: "🐧", titleEn: "System Administration", titleTh: "การบริหารจัดการระบบ", items: ["Linux Administration", "Windows Server", "Active Directory", "Virtualization (Proxmox VE/ESXi)", "Docker & Containerization", "Backup & Recovery"] },
   { icon: "🛡️", titleEn: "Security Topics", titleTh: "หัวข้อด้านความปลอดภัย", items: ["Firewalls", "NAC", "Sandbox", "WAF", "Secure Email Gateway", "Content Filter", "Wi-Fi Security", "Endpoint Hardening", "SIEM", "SOAR"] },
-  { icon: "🌐", titleEn: "Network & Cloud", titleTh: "เครือข่าย & คลาวด์", items: ["SD-WAN", "Zero Trust Network Access", "Cloud Security", "SASE", "Endpoint Monitoring", "Cloud Computing"] },
+  { icon: "🌐", titleEn: "Network & Cloud", titleTh: "เครือข่าย & คลาวด์", items: ["OSPF (FRRouting)", "BGP / eBGP (FRRouting)", "Dynamic Routing Protocols", "SD-WAN", "Zero Trust Network Access", "Cloud Security", "SASE", "Endpoint Monitoring", "Cloud Computing"] },
   { icon: "🔬", titleEn: "Research Interests", titleTh: "หัวข้อที่สนใจวิจัย", items: ["Enterprise Network", "Infrastructure Design", "Distributed Systems", "Hardware Architecture", "High Availability Systems", "Security Operations"] },
 ];
 
@@ -185,7 +186,10 @@ export const contact = {
   githubUsername: "Achernar046",
   instagram: "https://instagram.com/kunakorn_kup/",
   instagramHandle: "@kunakorn_kup",
+  facebook: "https://www.facebook.com/kunakorn.suwanaphong",
+  facebookHandle: "kunakorn.suwanaphong",
 };
+
 
 export interface Certificate {
   id: string;
@@ -413,6 +417,111 @@ export const labs: Lab[] = [
         "Linux IP forwarding and NAT (iptables MASQUERADE)",
         "Router port forwarding for self-hosted services",
         "End-to-end VPN verification methodology"
+      ]
+    }
+  },
+  {
+    id: "ospf-routing",
+    icon: "🔀",
+    color: "from-cyan-500/20 to-teal-500/20",
+    accentColor: "cyan",
+    titleEn: "OSPF Routing Lab (FRRouting)",
+    titleTh: "OSPF Routing Lab (FRRouting)",
+    overviewEn: "Built a 3-router OSPF topology on Proxmox VE using FRRouting — a production-grade routing suite — to demonstrate dynamic route learning, neighbor adjacency, and failure detection without any static routes.",
+    overviewTh: "สร้างโทโพโลยี OSPF 3 เราเตอร์บน Proxmox VE ด้วย FRRouting (ซอฟต์แวร์ Routing ระดับ Production) เพื่อสาธิตการเรียนรู้เส้นทางแบบ Dynamic, Neighbor Adjacency และการตรวจจับความล้มเหลว โดยไม่ต้องตั้ง Static Route ใดๆ",
+    stack: ["FRRouting", "OSPF", "Ubuntu Server", "Proxmox VE", "vtysh", "Netplan"],
+    status: "done",
+    detail: {
+      architecture: `            vmbr2                       vmbr3
+          (Link A-B)                  (Link B-C)
+Router-A ──────────── Router-B ──────────── Router-C
+10.0.12.1/30      10.0.12.2/30  10.0.23.1/30    10.0.23.2/30
+(Area 0)                                         (Area 0)
+
+Loopbacks (simulate networks "behind" each router):
+  Router-A: lo → 1.1.1.1/32
+  Router-B: lo → 2.2.2.2/32
+  Router-C: lo → 3.3.3.3/32
+
+Management (vmbr0, DHCP — SSH access from host):
+  All 3 routers have a management NIC on the home network`,
+      implemented: [
+        "Created 2 internal-only Proxmox bridges (vmbr2, vmbr3) as isolated point-to-point virtual cables",
+        "Built 3 lightweight Ubuntu VMs, each assigned /30 point-to-point IPs via Netplan",
+        "Added loopback addresses (1.1.1.1, 2.2.2.2, 3.3.3.3) to simulate networks behind each router",
+        "Installed FRR, enabled ospfd daemon, and configured OSPF Area 0 on all routers via vtysh",
+        "Verified OSPF neighbor adjacency reached Full state and routes propagated end-to-end",
+        "Deliberate link failure test — confirmed OSPF Dead Timer removed routes and re-established them on recovery"
+      ],
+      problems: [
+        {
+          title: "Ping Between Non-Adjacent Routers Failed Despite Correct Routing Table",
+          symptom: "show ip route ospf on Router-A correctly showed routes to Router-C's networks, but ping still failed with 100% packet loss",
+          solution: "Enabled IP forwarding via /etc/sysctl.d/99-routing.conf on all three routers — the Linux kernel's ip_forward was 0 (the Ubuntu default), so FRR's correct routing table wasn't being acted on by the kernel's data plane"
+        }
+      ],
+      skills: [
+        "OSPF configuration and verification using production routing software (FRR) via vtysh (Cisco IOS-style CLI)",
+        "Point-to-point /30 addressing convention and loopback-based network simulation",
+        "Diagnosing routing (control plane) vs. forwarding (data plane) issues independently",
+        "Failure detection and self-healing behavior of OSPF, verified through deliberate link failure testing",
+        "Proxmox internal-bridge networking to build isolated multi-node lab topologies"
+      ]
+    }
+  },
+  {
+    id: "bgp-routing",
+    icon: "🌍",
+    color: "from-violet-500/20 to-purple-500/20",
+    accentColor: "purple",
+    titleEn: "BGP Routing Lab (FRRouting)",
+    titleTh: "BGP Routing Lab (FRRouting)",
+    overviewEn: "Reconfigured the OSPF lab topology into three separate Autonomous Systems (AS 65001–65003) and established eBGP sessions using FRRouting to demonstrate AS-Path propagation, transit routing, and RFC 8212 default policy behavior.",
+    overviewTh: "ปรับโทโพโลยีจาก OSPF Lab ให้เป็น 3 Autonomous Systems แยกกัน (AS 65001–65003) และตั้งค่า eBGP ด้วย FRRouting เพื่อสาธิต AS-Path, Transit Routing และ RFC 8212 Default Policy",
+    stack: ["FRRouting", "eBGP", "Ubuntu Server", "Proxmox VE", "vtysh", "RFC 8212"],
+    status: "done",
+    detail: {
+      architecture: `┌──────────────┐     eBGP      ┌──────────────┐     eBGP      ┌──────────────┐
+│   AS 65001   │  10.0.12.0/30 │   AS 65002   │  10.0.23.0/30 │   AS 65003   │
+│  Router-A    │◄─────────────►│  Router-B    │◄─────────────►│  Router-C    │
+│  lo:1.1.1.1  │               │  lo:2.2.2.2  │               │  lo:3.3.3.3  │
+└──────────────┘               └──────────────┘               └──────────────┘
+
+Route propagation on Router-A (show ip bgp):
+  1.1.1.1/32  Weight 32768  Path: i           (originated locally)
+  2.2.2.2/32               Path: 65002 i      (learned from AS 65002)
+  3.3.3.3/32               Path: 65002 65003 i (transit via AS 65002)`,
+      implemented: [
+        "Disabled OSPF (no router ospf) and enabled bgpd daemon on all three routers",
+        "Assigned each router its own AS number (65001, 65002, 65003) and configured eBGP neighbors across each point-to-point link",
+        "Advertised each router's loopback into BGP via network X.X.X.X/32 under address-family ipv4 unicast",
+        "Created route-map ALLOW-ALL permit 10 and applied as in/out policy on every eBGP neighbor (RFC 8212 compliance)",
+        "Verified all 3 sessions reached Established state with correct prefix counts",
+        "Confirmed AS-Path propagation: Router-A shows 1-hop (65002 i) and 2-hop transit (65002 65003 i) routes correctly"
+      ],
+      problems: [
+        {
+          title: "Local vs. Remote IP Confusion in Neighbor Statements",
+          symptom: "Router-B's neighbor 10.0.23.1 remote-as 65003 was rejected with '% Can not configure the local system as neighbor'",
+          solution: "Cross-checked each router's actual assigned IP via 'ip a' before writing neighbor statements — the neighbor must point to the far-end router's address, not the local one. Also caught a typo pattern of 10.10.x.x instead of 10.0.x.x across multiple routers"
+        },
+        {
+          title: "BGP Sessions Established But Showing (Policy) Instead of Prefix Counts",
+          symptom: "show ip bgp summary showed Established sessions, but State/PfxRcd displayed '(Policy)' and no prefixes appeared from any neighbor",
+          solution: "Created a permissive route-map ALLOW-ALL permit 10 and applied it as both inbound and outbound policy on every eBGP neighbor — FRR enforces RFC 8212 by default, refusing to exchange any prefixes without an explicit policy. Adding 'neighbor ... activate' was a no-op since frr defaults traditional already auto-activates IPv4 unicast"
+        },
+        {
+          title: "Loopback Addresses Disappeared After VM Reboot, Silently Breaking Route Advertisement",
+          symptom: "After route-maps were applied and sessions Established, no prefixes were being advertised — show ip bgp on every router showed only its own locally-originated route",
+          solution: "Re-added each loopback address and made them persistent via a lo: stanza in each router's Netplan config — they had been added with 'ip addr add' (non-persistent) and were lost on reboot. FRR v7.4+ requires the network prefix to exist in the local RIB before advertising it via BGP"
+        }
+      ],
+      skills: [
+        "eBGP configuration across multiple Autonomous Systems using production routing software (FRR)",
+        "Understanding and applying RFC 8212 (default eBGP policy requirement) with route-map based policy",
+        "Reading and interpreting AS-Path attributes to distinguish directly-originated, single-hop, and transit routes",
+        "Systematic troubleshooting across three distinct root causes affecting the same symptom (missing prefixes)",
+        "Recognizing when a fix attempt is a no-op by verifying the running-config rather than assuming command success"
       ]
     }
   },

@@ -34,9 +34,9 @@ export default function AboutSection() {
           <div className="flex flex-col items-center gap-6">
             {/* Avatar ring */}
             <div className="relative">
-              <div className="w-44 h-44 rounded-full p-[3px] bg-gradient-to-br from-blue-500 via-blue-300/20 to-blue-600 animate-spin-slow">
+              <div className="w-44 h-44 rounded-full p-[3px] bg-gradient-to-br from-blue-500 via-blue-300/20 to-blue-600">
                 <div className="w-full h-full rounded-full bg-[#0a1628] flex items-center justify-center overflow-hidden">
-                  <img src="/Baked_Potato_JE4_BE2.webp" alt="Baked Potato Avatar" className="w-28 h-28 object-contain" />
+                  <img src="/picture/pic/por.png" alt="Profile" className="w-full h-full object-cover" />
                 </div>
               </div>
               <span className="absolute bottom-2 right-2 w-5 h-5 rounded-full bg-emerald-400 border-2 border-[#020817] shadow-[0_0_8px_#10b981]" />

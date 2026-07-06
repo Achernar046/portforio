@@ -1,16 +1,19 @@
+import dynamic from "next/dynamic";
 import NetworkCanvas from "@/components/NetworkCanvas";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import SkillsSection from "@/components/sections/SkillsSection";
-import ProjectsSection from "@/components/sections/ProjectsSection";
-import LabSection from "@/components/sections/LabSection";
-import AchievementsSection from "@/components/sections/AchievementsSection";
-import LearningSection from "@/components/sections/LearningSection";
-import CertificatesSection from "@/components/sections/CertificatesSection";
-import ContactSection from "@/components/sections/ContactSection";
-import GallerySection from "@/components/sections/GallerySection";
-import Footer from "@/components/Footer";
+
+/* ── Lazy-load below-the-fold sections ── */
+const ProjectsSection     = dynamic(() => import("@/components/sections/ProjectsSection"));
+const LabSection          = dynamic(() => import("@/components/sections/LabSection"));
+const AchievementsSection = dynamic(() => import("@/components/sections/AchievementsSection"));
+const LearningSection     = dynamic(() => import("@/components/sections/LearningSection"));
+const CertificatesSection = dynamic(() => import("@/components/sections/CertificatesSection"));
+const ContactSection      = dynamic(() => import("@/components/sections/ContactSection"));
+const GallerySection      = dynamic(() => import("@/components/sections/GallerySection"));
+const Footer              = dynamic(() => import("@/components/Footer"));
 
 export default function Home() {
   return (
@@ -27,10 +30,12 @@ export default function Home() {
       {/* Navigation */}
       <Navbar />
 
-      {/* Sections */}
+      {/* Above-the-fold sections — loaded immediately */}
       <HeroSection />
       <AboutSection />
       <SkillsSection />
+
+      {/* Below-the-fold sections — lazy loaded */}
       <ProjectsSection />
       <LabSection />
       <AchievementsSection />
