@@ -292,15 +292,74 @@ export function BgpDiagram() {
   );
 }
 
+/* ─── pfSense → Wazuh SIEM Diagram ─────────────────────── */
+export function WazuhSIEMDiagram() {
+  return (
+    <div className="space-y-2 text-center">
+      {/* pfSense */}
+      <div className="flex justify-center">
+        <Node icon="🛡️" label="pfSense CE" sub="LAN: 10.10.10.1" color="bg-orange-900/60 border-orange-500/50" />
+      </div>
+      <Arrow vertical label="Syslog UDP :514" />
+
+      {/* Wazuh Manager box */}
+      <Section title="Wazuh Manager (Ubuntu 22.04 · 10.10.10.50)" color="border-red-500/40">
+        <div className="space-y-2">
+          <div className="flex justify-center">
+            <Node icon="📡" label="wazuh-remoted" sub=":514 listener" color="bg-red-900/60 border-red-500/50" />
+          </div>
+          <Arrow vertical label="decode" />
+          <div className="flex justify-center">
+            <Node icon="📝" label="Custom Decoder" sub="PCRE2 · filterlog fields" color="bg-rose-900/60 border-rose-500/50" />
+          </div>
+          <Arrow vertical label="fire rules" />
+          {/* Rule chain */}
+          <div className="rounded-lg border border-red-500/20 bg-black/20 p-2 text-left space-y-1">
+            <div className="text-[9px] font-mono flex gap-2">
+              <span className="text-red-400 font-semibold">100100 L3</span>
+              <span className="text-slate-400">Any filterlog event</span>
+            </div>
+            <div className="text-[9px] font-mono flex gap-2">
+              <span className="text-orange-400 font-semibold">100101 L6</span>
+              <span className="text-slate-400">fw_action == block → src/dst in alert</span>
+            </div>
+            <div className="text-[9px] font-mono flex gap-2">
+              <span className="text-rose-400 font-semibold">100102 L10</span>
+              <span className="text-slate-400">10 blocks/60s → Port Scan (MITRE T1046)</span>
+            </div>
+          </div>
+        </div>
+      </Section>
+      <Arrow vertical label="Filebeat" />
+
+      {/* OpenSearch */}
+      <div className="flex justify-center">
+        <Node icon="🔍" label="OpenSearch Indexer" sub="wazuh-alerts-*" color="bg-blue-900/60 border-blue-500/50" />
+      </div>
+      <Arrow vertical />
+
+      {/* Dashboard */}
+      <Section title="pfSense Firewall Monitoring Dashboard" color="border-red-500/20">
+        <div className="flex justify-center gap-2 flex-wrap">
+          <Node icon="📊" label="Alert Timeline" sub="Date Histogram" color="bg-slate-800 border-slate-600" />
+          <Node icon="🚫" label="Blocked Ports" sub="Terms · dstport" color="bg-slate-800 border-slate-600" />
+          <Node icon="🌐" label="Source IPs" sub="Terms · srcip" color="bg-slate-800 border-slate-600" />
+        </div>
+      </Section>
+    </div>
+  );
+}
+
 /* ─── Index map ─────────────────────────────────────────── */
 import React from "react";
 
 const diagramMap: Record<string, React.ReactNode> = {
-  "active-directory": <ADDiagram />,
-  "pfsense-vlan":     <PfsenseDiagram />,
-  "wireguard-vpn":    <WireGuardDiagram />,
-  "ospf-routing":     <OspfDiagram />,
-  "bgp-routing":      <BgpDiagram />,
+  "active-directory":   <ADDiagram />,
+  "pfsense-vlan":       <PfsenseDiagram />,
+  "wireguard-vpn":      <WireGuardDiagram />,
+  "ospf-routing":       <OspfDiagram />,
+  "bgp-routing":        <BgpDiagram />,
+  "pfsense-wazuh-siem": <WazuhSIEMDiagram />,
 };
 
 export function getLabDiagram(labId: string): React.ReactNode | null {

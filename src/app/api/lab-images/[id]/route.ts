@@ -8,6 +8,7 @@ const LAB_FOLDER_MAP: Record<string, string> = {
   "wireguard-vpn":    "wireguard-vpn",
   "ospf-routing":     "OSPFRoutingLab(FRRouting)",
   "bgp-routing":      "BGPRoutingLab(FRRouting)",
+  "pfsense-wazuh-siem": "pfSense_WazuhSIEMIntegrationLab",
 };
 
 const IMAGE_EXTS = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif"]);

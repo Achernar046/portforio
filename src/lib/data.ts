@@ -77,7 +77,7 @@ export const about = {
   stats: [
     { value: "2023", labelEn: "Started", labelTh: "เริ่มศึกษา" },
     { value: "5", labelEn: "Skill Areas", labelTh: "กลุ่มทักษะ" },
-    { value: "5", labelEn: "Labs Done", labelTh: "Lab เสร็จแล้ว" },
+    { value: "6", labelEn: "Labs Done", labelTh: "Lab เสร็จแล้ว" },
     { value: "4", labelEn: "Achievements", labelTh: "ผลงาน" },
   ],
   interests: [
@@ -522,6 +522,48 @@ Route propagation on Router-A (show ip bgp):
         "Reading and interpreting AS-Path attributes to distinguish directly-originated, single-hop, and transit routes",
         "Systematic troubleshooting across three distinct root causes affecting the same symptom (missing prefixes)",
         "Recognizing when a fix attempt is a no-op by verifying the running-config rather than assuming command success"
+      ]
+    }
+  },
+  {
+    id: "pfsense-wazuh-siem",
+    icon: "🔍",
+    color: "from-red-500/20 to-rose-500/20",
+    accentColor: "red" as const,
+    titleEn: "pfSense → Wazuh SIEM Integration",
+    titleTh: "pfSense → Wazuh SIEM Integration",
+    overviewEn: "Built a full syslog-based log pipeline from pfSense firewall into Wazuh SIEM/XDR. Wrote custom decoders and detection rules to parse pfSense filterlog, generate real-time alerts (including port-scan detection via MITRE T1046), and built a firewall monitoring dashboard in OpenSearch Dashboards.",
+    overviewTh: "สร้าง Log Pipeline แบบ Syslog เต็มรูปแบบจาก pfSense Firewall เข้าสู่ Wazuh SIEM/XDR เขียน Custom Decoder และ Detection Rules เพื่อ Parse pfSense filterlog สร้าง Real-time Alerts (รวมการตรวจจับ Port Scan ด้วย MITRE T1046) และสร้าง Firewall Monitoring Dashboard ใน OpenSearch Dashboards",
+    stack: ["Wazuh 4.14", "pfSense CE", "Ubuntu Server", "Proxmox VE", "OpenSearch", "Filebeat", "Syslog UDP", "MITRE ATT&CK"],
+    status: "done",
+    detail: {
+      architecture: `pfSense Firewall (10.10.10.1)\n   │  Syslog UDP 514\n   ▼\nWazuh Manager (Ubuntu 22.04)\n   ├── wazuh-remoted  → receives syslog on :514\n   ├── Custom Decoder → parses filterlog CSV fields\n   │     (interface, reason, fw_action, srcip, dstip, srcport, dstport)\n   ├── Custom Rules → 100100 / 100101 / 100102 (port-scan MITRE T1046)\n   └── Filebeat\n        │\n        ▼\n   OpenSearch Indexer (wazuh-alerts-*)\n        │\n        ▼\n   OpenSearch Dashboards\n        └── pfSense Firewall Monitoring Dashboard`,
+      implemented: [
+        "Added 2nd virtual NIC to Wazuh VM and configured static IP 10.10.10.50/24 via Netplan (renderer: networkd)",
+        "Configured pfSense remote syslog → 10.10.10.50:514 (System, Firewall, DHCP events)",
+        "Added syslog <remote> listener block in ossec.conf for UDP port 514",
+        "Wrote PCRE2-based custom decoder to extract 9 fields from pfSense filterlog CSV payload",
+        "Wrote 3-rule chain: base event (L3) → blocked traffic with src/dst in description (L6) → port-scan frequency rule 10 events/60s (L10, MITRE T1046)",
+        "Validated decoder+rules with wazuh-logtest before touching live config",
+        "Built pfSense Firewall Monitoring dashboard in OpenSearch: alert timeline, top blocked ports, top blocked source IPs"
+      ],
+      problems: [
+        { title: "wazuh-manager failed to start after adding decoder", symptom: "ERROR (1452): Syntax error on regex — manager refused to start", solution: "Wazuh's default OS_Regex engine doesn't support PCRE syntax (\\d, \\S, \\[). Switched to <regex type=\"pcre2\"> which enables full PCRE2 support" },
+        { title: "pfSense IP collided with home router after factory reset", symptom: "pfSense LAN defaulted to 192.168.1.1 — web UI unreachable over home LAN", solution: "Used pfSense console menu option 2 to directly reassign LAN to 10.10.10.1/24, bypassing web UI" },
+        { title: "Wazuh VM had no route to pfSense lab subnet", symptom: "ping 10.10.10.1 failed — Wazuh only had a NIC on 192.168.1.0/24", solution: "Added a 2nd virtual NIC in Proxmox bridged to the same vSwitch as pfSense LAN, then assigned static IP via Netplan" },
+        { title: "Static IP reverted to DHCP after VM reboot", symptom: "ens19 came back with a DHCP lease despite Netplan specifying static IP", solution: "Added renderer: networkd in Netplan config — forces systemd-networkd exclusively, preventing NetworkManager from racing at boot" },
+        { title: "filterlog decoder never matched — 'No decoder matched'", symptom: "wazuh-logtest showed Phase 2: No decoder matched on real captured lines", solution: "Switched from <program_name> to <prematch>filterlog</prematch> — wazuh-remoted's syslog path prefixes lines non-standardly, blocking clean program_name extraction" },
+        { title: "Rule failed to load — 'Field action is static'", symptom: "wazuh-analysisd: ERROR: Field 'action' is static", solution: "'action' is reserved by Wazuh's active-response subsystem. Renamed decoder field to 'fw_action' in both decoder order and rule field references" },
+        { title: "Rules never fired despite correct field decoding", symptom: "Phase 3 never appeared in wazuh-logtest output after all fields decoded correctly", solution: "Rule used <decoded_as>pfsense-filterlog-fields</decoded_as> (child name), but Wazuh reports parent's name for matching by default. Fixed by pointing rule at parent name 'pfsense-filterlog'" },
+        { title: "Dashboard showed 'No results' despite alerts firing", symptom: "Threat Hunting returned zero results for rule.groups: pfsense", solution: "Dashboard time range defaulted to a stale narrow window. Widened to 'Last 1 day' — alerts appeared immediately. IndexerConnector warnings in ossec.log were a red herring (unrelated inventory feature)" }
+      ],
+      skills: [
+        "Wazuh SIEM architecture: remoted, decoder engine, rule engine, Filebeat, OpenSearch indexer pipeline",
+        "Writing PCRE2-based custom decoders to parse structured syslog payloads (pfSense filterlog CSV format)",
+        "Designing multi-level detection rule chains with frequency-based correlation (port-scan detection, MITRE T1046)",
+        "Debugging a multi-hop pipeline hop-by-hop: network → syslog receipt → decode → rule → indexer → dashboard",
+        "Netplan static IP configuration with explicit renderer to survive VM reboots under NetworkManager",
+        "OpenSearch Dashboards: index pattern setup, visualization types (Date Histogram, Terms aggregation), dashboard assembly"
       ]
     }
   },

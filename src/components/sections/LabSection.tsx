@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   X, ChevronRight, ChevronLeft, CheckCircle2, AlertTriangle,
   Wrench, Server, BookOpen, GraduationCap, Clock, Loader2,
-  Images, ZoomIn,
+  Images, ZoomIn, Download,
 } from "lucide-react";
 import { labs, type Lab } from "@/lib/data";
 import { useLang } from "@/contexts/LangContext";
@@ -13,22 +13,24 @@ import { getLabDiagram } from "@/components/LabDiagrams";
 
 /* ─── Accent colour map ─────────────────────────────────── */
 const accentMap: Record<string, { border: string; text: string; bg: string; badge: string }> = {
-  blue:   { border: "border-blue-500/40",   text: "text-blue-400",   bg: "bg-blue-500/10",   badge: "bg-blue-500/20 text-blue-300 border-blue-500/30" },
+  blue: { border: "border-blue-500/40", text: "text-blue-400", bg: "bg-blue-500/10", badge: "bg-blue-500/20 text-blue-300 border-blue-500/30" },
   orange: { border: "border-orange-500/40", text: "text-orange-400", bg: "bg-orange-500/10", badge: "bg-orange-500/20 text-orange-300 border-orange-500/30" },
-  green:  { border: "border-green-500/40",  text: "text-green-400",  bg: "bg-green-500/10",  badge: "bg-green-500/20 text-green-300 border-green-500/30" },
-  cyan:   { border: "border-cyan-500/40",   text: "text-cyan-400",   bg: "bg-cyan-500/10",   badge: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30" },
+  green: { border: "border-green-500/40", text: "text-green-400", bg: "bg-green-500/10", badge: "bg-green-500/20 text-green-300 border-green-500/30" },
+  cyan: { border: "border-cyan-500/40", text: "text-cyan-400", bg: "bg-cyan-500/10", badge: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30" },
   yellow: { border: "border-yellow-500/40", text: "text-yellow-400", bg: "bg-yellow-500/10", badge: "bg-yellow-500/20 text-yellow-300 border-yellow-500/30" },
   purple: { border: "border-purple-500/40", text: "text-purple-400", bg: "bg-purple-500/10", badge: "bg-purple-500/20 text-purple-300 border-purple-500/30" },
-  slate:  { border: "border-slate-500/40",  text: "text-slate-400",  bg: "bg-slate-500/10",  badge: "bg-slate-500/20 text-slate-300 border-slate-500/30" },
+  red:    { border: "border-red-500/40",    text: "text-red-400",    bg: "bg-red-500/10",    badge: "bg-red-500/20 text-red-300 border-red-500/30" },
+  slate: { border: "border-slate-500/40", text: "text-slate-400", bg: "bg-slate-500/10", badge: "bg-slate-500/20 text-slate-300 border-slate-500/30" },
 };
 
 /* ─── Image URL helper (static public path — Vercel-compatible) ─ */
 const LAB_STATIC_FOLDER: Record<string, string> = {
   "active-directory": "active-directory",
-  "pfsense-vlan":     "pfsense-vlan",
-  "wireguard-vpn":    "wireguard-vpn",
-  "ospf-routing":     "OSPFRoutingLab(FRRouting)",
-  "bgp-routing":      "BGPRoutingLab(FRRouting)",
+  "pfsense-vlan": "pfsense-vlan",
+  "wireguard-vpn": "wireguard-vpn",
+  "ospf-routing": "OSPFRoutingLab(FRRouting)",
+  "bgp-routing": "BGPRoutingLab(FRRouting)",
+  "pfsense-wazuh-siem": "pfSense_WazuhSIEMIntegrationLab",
 };
 
 function imgUrl(labId: string, file: string) {
@@ -50,7 +52,7 @@ function Lightbox({
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft")  onPrev();
+      if (e.key === "ArrowLeft") onPrev();
       if (e.key === "ArrowRight") onNext();
     };
     window.addEventListener("keydown", handler);
@@ -117,9 +119,8 @@ function Lightbox({
           <button
             key={img}
             onClick={(e) => { e.stopPropagation(); /* set index handled outside */ }}
-            className={`shrink-0 w-12 h-8 rounded-md overflow-hidden border-2 transition-all ${
-              i === index ? "border-white" : "border-transparent opacity-50 hover:opacity-80"
-            }`}
+            className={`shrink-0 w-12 h-8 rounded-md overflow-hidden border-2 transition-all ${i === index ? "border-white" : "border-transparent opacity-50 hover:opacity-80"
+              }`}
           >
             <img src={imgUrl(labId, img)} alt="" className="w-full h-full object-cover" />
           </button>
@@ -248,6 +249,19 @@ function ReadmeTab({ labId, accentColor }: { labId: string; accentColor: string 
       .catch(() => { setError(true); setLoading(false); });
   }, [labId, lang]);
 
+  const handleDownload = useCallback(() => {
+    if (!content) return;
+    const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement("a");
+    a.href     = url;
+    a.download = `${labId}-README${lang === "th" ? ".th" : ""}.md`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, [content, labId, lang]);
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-16 gap-3">
@@ -273,6 +287,20 @@ function ReadmeTab({ labId, accentColor }: { labId: string; accentColor: string 
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.18 }}
     >
+      {/* Download bar */}
+      <div className="flex items-center justify-between mb-4">
+        <span className="text-slate-500 text-xs font-mono">
+          {t("README.md", lang === "th" ? "README.th.md" : "README.md")}
+        </span>
+        <button
+          onClick={handleDownload}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono border transition-all
+            ${ac.badge} hover:opacity-80 active:scale-95`}
+        >
+          <Download size={12} />
+          {t("Download .md", "ดาวน์โหลด .md")}
+        </button>
+      </div>
       <MarkdownRenderer content={content} accentColor={accentColor} />
     </motion.div>
   );
@@ -291,11 +319,10 @@ function LabCard({ lab, onOpen }: { lab: Lab; onOpen: () => void }) {
       viewport={{ once: true }}
       whileHover={isDone ? { y: -6 } : {}}
       onClick={isDone ? onOpen : undefined}
-      className={`group relative rounded-2xl bg-white/[0.03] border border-white/5 overflow-hidden backdrop-blur-sm flex flex-col transition-all duration-300 ${
-        isDone
+      className={`group relative rounded-2xl bg-white/[0.03] border border-white/5 overflow-hidden backdrop-blur-sm flex flex-col transition-all duration-300 ${isDone
           ? `cursor-pointer hover:${ac.border} hover:shadow-[0_12px_40px_rgba(0,0,0,0.3)]`
           : "opacity-55 cursor-default"
-      }`}
+        }`}
     >
       <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${lab.color} ${isDone ? "group-hover:opacity-100 opacity-60" : "opacity-30"} transition-opacity`} />
 
@@ -347,11 +374,11 @@ function LabModal({ lab, onClose }: { lab: Lab; onClose: () => void }) {
   const [activeTab, setActiveTab] = useState<"overview" | "gallery" | "readme" | "problems" | "skills">("overview");
 
   const tabs = [
-    { id: "overview"  as const, icon: <Server size={13} />,        label: t("Overview", "ภาพรวม") },
-    { id: "gallery"   as const, icon: <Images size={13} />,        label: t("Gallery", "รูปภาพ") },
-    { id: "readme"    as const, icon: <BookOpen size={13} />,      label: "README.md" },
-    { id: "problems"  as const, icon: <AlertTriangle size={13} />, label: t("Problems", "ปัญหา & วิธีแก้") },
-    { id: "skills"    as const, icon: <GraduationCap size={13} />, label: t("Skills", "ทักษะ") },
+    { id: "overview" as const, icon: <Server size={13} />, label: t("Overview", "ภาพรวม") },
+    { id: "gallery" as const, icon: <Images size={13} />, label: t("Gallery", "รูปภาพ") },
+    { id: "readme" as const, icon: <BookOpen size={13} />, label: "README.md" },
+    { id: "problems" as const, icon: <AlertTriangle size={13} />, label: t("Problems", "ปัญหา & วิธีแก้") },
+    { id: "skills" as const, icon: <GraduationCap size={13} />, label: t("Skills", "ทักษะ") },
   ];
 
   return (
@@ -400,11 +427,10 @@ function LabModal({ lab, onClose }: { lab: Lab; onClose: () => void }) {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-1.5 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors border-b-2 ${
-                activeTab === tab.id
+              className={`flex items-center gap-1.5 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors border-b-2 ${activeTab === tab.id
                   ? `${ac.text} border-current`
                   : "text-slate-500 border-transparent hover:text-slate-300"
-              }`}
+                }`}
             >
               {tab.icon}
               {tab.label}
@@ -440,7 +466,7 @@ function LabModal({ lab, onClose }: { lab: Lab; onClose: () => void }) {
                       </div>
                     ) : (
                       <pre className="bg-black/40 rounded-xl p-4 text-xs font-mono text-slate-300 leading-relaxed overflow-x-auto border border-white/5 whitespace-pre">
-{d.architecture}
+                        {d.architecture}
                       </pre>
                     )
                   }
@@ -550,7 +576,7 @@ export default function LabSection() {
   const { t } = useLang();
   const [selected, setSelected] = useState<Lab | null>(null);
 
-  const done   = labs.filter((l) => l.status === "done");
+  const done = labs.filter((l) => l.status === "done");
   const coming = labs.filter((l) => l.status === "coming");
 
   return (
@@ -605,7 +631,7 @@ export default function LabSection() {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {coming.map((lab) => (
-                <LabCard key={lab.id} lab={lab} onOpen={() => {}} />
+                <LabCard key={lab.id} lab={lab} onOpen={() => { }} />
               ))}
             </div>
           </div>

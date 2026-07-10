@@ -10,6 +10,7 @@ const LAB_FOLDER_MAP: Record<string, string> = {
   "wireguard-vpn":    "wireguard-vpn",
   "ospf-routing":     "OSPFRoutingLab(FRRouting)",
   "bgp-routing":      "BGPRoutingLab(FRRouting)",
+  "pfsense-wazuh-siem": "pfSense_WazuhSIEMIntegrationLab",
 };
 
 const README_NAME: Record<string, { en: string; th: string }> = {
@@ -18,6 +19,7 @@ const README_NAME: Record<string, { en: string; th: string }> = {
   "wireguard-vpn":    { en: "03-wireguard-vpn-README.md",        th: "03-wireguard-vpn-README.th.md" },
   "ospf-routing":     { en: "ospf-routing-README.md",            th: "ospf-routing-README.th.md" },
   "bgp-routing":      { en: "bgp-routing-README.md",             th: "bgp-routing-README.th.md" },
+  "pfsense-wazuh-siem": { en: "README.md",                      th: "README.th.md" },
 };
 
 function labDir(folder: string) {
