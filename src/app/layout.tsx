@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Sarabun, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { LangProvider } from "@/contexts/LangContext";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="th" className="scroll-smooth">
       <body className={`${inter.variable} ${sarabun.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#020817] text-slate-100`}>
         <LangProvider>{children}</LangProvider>
+        <Analytics />
       </body>
     </html>
   );
