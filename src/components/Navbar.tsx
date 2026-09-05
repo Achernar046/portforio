@@ -39,31 +39,46 @@ export default function Navbar() {
     return () => obs.disconnect();
   }, []);
 
+  const scrollToTarget = (targetId: string) => {
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      const navOffset = 70;
+      const rect = targetElement.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const targetY = Math.max(0, rect.top + scrollTop - navOffset);
+
+      try {
+        window.scrollTo({
+          top: targetY,
+          behavior: "smooth",
+        });
+      } catch {
+        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      window.location.hash = `#${targetId}`;
+    }
+  };
+
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
     e.preventDefault();
+    const targetId = href.replace("#", "");
+
+    // Close mobile menu
     setMenuOpen(false);
 
-    const targetId = href.replace("#", "");
-    const targetElement = document.getElementById(targetId);
+    // Give the mobile touch cycle and menu collapse a moment so mobile WebKit/Blink doesn't cancel the scroll
+    setTimeout(() => {
+      scrollToTarget(targetId);
+    }, 60);
 
-    if (targetElement) {
-      const navOffset = 70;
-      const elementPosition = targetElement.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - navOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-
-      if (window.history && window.history.pushState) {
-        window.history.pushState(null, "", href);
-      }
-      setActive(targetId);
+    if (window.history && window.history.pushState) {
+      window.history.pushState(null, "", href);
     }
+    setActive(targetId);
   };
 
   return (
@@ -144,10 +159,10 @@ export default function Navbar() {
                       key={item.href}
                       href={item.href}
                       onClick={(e) => handleNavClick(e, item.href)}
-                      className={`px-4 py-3 rounded-xl text-base font-medium transition-all block touch-manipulation cursor-pointer select-none active:scale-[0.98] ${
+                      className={`px-4 py-3 rounded-xl text-base font-medium transition-all block touch-manipulation cursor-pointer ${
                         isActive
                           ? "text-blue-400 bg-blue-500/15 font-semibold border border-blue-500/20"
-                          : "text-slate-300 hover:text-blue-400 active:text-blue-400 hover:bg-blue-500/10 active:bg-blue-500/20"
+                          : "text-slate-200 hover:text-blue-400 active:text-blue-400 hover:bg-blue-500/10 active:bg-blue-500/20"
                       }`}
                     >
                       {lang === "en" ? item.en : item.th}
